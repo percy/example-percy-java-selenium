@@ -1,0 +1,8 @@
+# Maven build directory
+target/
+
+# Code editor related stuff
+.classpath
+.project
+.vscode
+.settings
