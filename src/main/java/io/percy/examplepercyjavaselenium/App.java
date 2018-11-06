@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
@@ -18,6 +20,13 @@ public class App {
     private static final Integer PORT = 8000;
     // This file path is relative to that classpath root.
     private static final String INDEX_PATH = "index.html";
+    // Recognized Mime type map (extension -> mimetype)
+    private static final Map<String, String> MIME_MAP = new HashMap<String, String>();
+    static {
+        MIME_MAP.put("html", "text/html");
+        MIME_MAP.put("js", "application/javascript");
+        MIME_MAP.put("css", "text/css");
+    }
 
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
@@ -49,12 +58,19 @@ public class App {
             responseCode = 404;
         } else {
             response = App.class.getClassLoader().getResourceAsStream(resourcePath).readAllBytes();
-            responseCode = 202;
+            responseCode = 200;
         }
 
+        exchange.getResponseHeaders().add("Content-Type", getMimeType(resourcePath));
         exchange.sendResponseHeaders(responseCode, response.length);
         OutputStream os = exchange.getResponseBody();
         os.write(response);
         os.close();
+    }
+
+    private static String getMimeType(String resourcePath) {
+        int lastDotIndex = resourcePath.lastIndexOf('.');
+        String extension = lastDotIndex > 0 ? resourcePath.substring(lastDotIndex + 1) : "";
+        return MIME_MAP.getOrDefault(extension, "text/plain");
     }
 }
