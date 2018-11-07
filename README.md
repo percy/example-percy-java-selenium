@@ -8,6 +8,13 @@ This example app is an HTTP server that serves a fork of the [TodoMVC](https://g
 
 It requires Java 11 and Maven >3.6.
 
+The Selenium tests use ChromeDriver, which you need to install separately for your system.
+On Mac OS, you can use Homebrew:
+```bash
+$ brew tap homebrew/cask && brew cask install chromedriver
+```
+For other systems, see: https://sites.google.com/a/chromium.org/chromedriver/.
+
 ## Building and running the app
 
 To compile and build a jar containing our app:
@@ -21,3 +28,8 @@ $ java -cp target/example-percy-java-selenium-1.0-SNAPSHOT.jar io.percy.examplep
 ```
 
 Then visit http://localhost:8000 to see the app in action.
+
+To run the tests:
+```bash
+$ mvn test
+```
