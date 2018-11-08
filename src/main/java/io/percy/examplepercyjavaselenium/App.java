@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Executor;
 
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
@@ -29,11 +30,20 @@ public class App {
     }
 
     public static void main(String[] args) throws IOException {
+        // Using a null executor will cause the server to run on the current thread, thus
+        // blocking execution until the server exits or this process is terminated.
+        startServer(null);
+    }
+
+    public static HttpServer startServer(Executor executor) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
         HttpContext context = server.createContext("/");
         context.setHandler(App::handleRequest);
         System.out.println(String.format("Starting server, listening on port %d", PORT));
+        System.out.println("CTRL-C to exit");
+        server.setExecutor(executor);
         server.start();
+        return server;
     }
 
     private static void handleRequest(HttpExchange exchange) throws IOException {
