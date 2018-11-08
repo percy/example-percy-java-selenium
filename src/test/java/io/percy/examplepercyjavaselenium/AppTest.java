@@ -30,6 +30,7 @@ public class AppTest {
     private static WebDriver driver;
 
     // Re-create the server under test and the test browser for each test case.
+    // This makes the tests slower, but ensures a clean environment for each test.
     @BeforeEach
     public void startAppAndOpenBrowser() throws IOException {
         // Create a threadpool with 1 thread and run our server on it.
