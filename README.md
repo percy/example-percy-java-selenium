@@ -33,3 +33,8 @@ To run the tests:
 ```bash
 $ mvn test
 ```
+
+To run Percy snapshots, first set the `PERCY_TOKEN` environment variable, and then run:
+```bash
+$ ./run_snapshots.sh
+```
