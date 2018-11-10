@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,7 +19,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+import io.percy.selenium.Percy;;
 
 /**
  * Unit test for example App.
@@ -28,9 +31,8 @@ public class AppTest {
     private static ExecutorService serverExecutor;
     private static HttpServer server;
     private static WebDriver driver;
+    private static Percy percy;
 
-    // Re-create the server under test and the test browser for each test case.
-    // This makes the tests slower, but ensures a clean environment for each test.
     @BeforeEach
     public void startAppAndOpenBrowser() throws IOException {
         // Create a threadpool with 1 thread and run our server on it.
@@ -40,6 +42,7 @@ public class AppTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         driver = new ChromeDriver(options);
+        percy = new Percy(driver);
     }
 
     @AfterEach
@@ -56,6 +59,9 @@ public class AppTest {
         driver.get(TEST_URL);
         WebElement element = driver.findElement(By.className("todoapp"));
         assertNotNull(element);
+
+        // Take a Percy snapshot.
+        percy.snapshot("Home Page");
     }
 
     @Test
@@ -74,6 +80,9 @@ public class AppTest {
         // Now we should have 1 todo.
         todoEls = driver.findElements(By.cssSelector(".todo-list li"));
         assertEquals(1, todoEls.size());
+
+        // Take a Percy snapshot specifying browser widths and minimum height.
+        percy.snapshot("One todo", Arrays.asList(768, 992, 1200), 2000);
     }
 
     @Test

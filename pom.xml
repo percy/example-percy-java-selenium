@@ -1,5 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.percy.examplepercyjavaselenium</groupId>
   <artifactId>example-percy-java-selenium</artifactId>
@@ -9,6 +9,7 @@
   <url>http://maven.apache.org</url>
   <properties>
     <junit.jupiter.version>5.3.1</junit.jupiter.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
     <dependency>
@@ -25,15 +26,24 @@
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
     <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>3.141.0</version>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-java</artifactId>
+      <version>3.141.0</version>
     </dependency>
     <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
     <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-chrome-driver</artifactId>
-        <version>3.141.0</version>
+      <groupId>org.seleniumhq.selenium</groupId>
+      <artifactId>selenium-chrome-driver</artifactId>
+      <version>3.141.0</version>
+    </dependency>
+    <!-- Latest percy-java-selenium JAR can be downloaded from https://github.com/percy/percy-java-selenium/releases -->
+    <!-- To avoid depending on a JAR in your project directory, you can use mvn install to install the JAR into your local repository -->
+    <dependency>
+      <groupId>io.percy.selenium</groupId>
+      <artifactId>percy-java-selenium</artifactId>
+      <version>0.0.1</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/percy-java-selenium-0.0.1.jar</systemPath>
     </dependency>
   </dependencies>
   <build>
