@@ -36,14 +36,10 @@
       <artifactId>selenium-chrome-driver</artifactId>
       <version>3.141.0</version>
     </dependency>
-    <!-- Latest percy-java-selenium JAR can be downloaded from https://github.com/percy/percy-java-selenium/releases -->
-    <!-- To avoid depending on a JAR in your project directory, you can use mvn install to install the JAR into your local repository -->
     <dependency>
-      <groupId>io.percy.selenium</groupId>
+      <groupId>io.percy</groupId>
       <artifactId>percy-java-selenium</artifactId>
       <version>0.0.1</version>
-      <scope>system</scope>
-      <systemPath>${project.basedir}/percy-java-selenium-0.0.1.jar</systemPath>
     </dependency>
   </dependencies>
   <build>
