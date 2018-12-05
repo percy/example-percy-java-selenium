@@ -6,7 +6,7 @@ This example app is an HTTP server that serves a fork of the [TodoMVC](https://g
 (forked at commit
 [c78ae12a1834a11da6236c64a0c0fb06b20b7c51](https://github.com/tastejs/todomvc/tree/c78ae12a1834a11da6236c64a0c0fb06b20b7c51)).
 
-It requires Java 11 and Maven >3.6.
+It requires Java 8 and Maven >3.6.
 
 The Selenium tests use ChromeDriver, which you need to install separately for your system.
 On Mac OS, you can use Homebrew:
@@ -32,6 +32,12 @@ Then visit http://localhost:8000 to see the app in action.
 To run the tests:
 ```bash
 $ mvn test
+```
+
+To install the Percy agent for this project, run `npm install`:
+
+```bash
+$ npm install
 ```
 
 To run Percy snapshots, first set the `PERCY_TOKEN` environment variable, and then run:
