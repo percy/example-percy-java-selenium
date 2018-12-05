@@ -81,8 +81,8 @@ public class AppTest {
         todoEls = driver.findElements(By.cssSelector(".todo-list li"));
         assertEquals(1, todoEls.size());
 
-        // Take a Percy snapshot specifying browser widths and minimum height.
-        percy.snapshot("One todo", Arrays.asList(768, 992, 1200), 2000);
+        // Take a Percy snapshot specifying browser widths.
+        percy.snapshot("One todo", Arrays.asList(768, 992, 1200));
     }
 
     @Test
@@ -100,5 +100,8 @@ public class AppTest {
 
         todoCountEl = driver.findElement(By.className("todo-count"));
         assertEquals("0 items left", todoCountEl.getText());
+
+        // Take a Percy snapshot specifying a minimum height.
+        percy.snapshot("Checked off todo", null, 2000);
     }
 }
