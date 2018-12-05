@@ -67,7 +67,9 @@ public class App {
             response = "404 - File Not Found".getBytes();
             responseCode = 404;
         } else {
-            response = App.class.getClassLoader().getResourceAsStream(resourcePath).readAllBytes();
+            InputStream stream = App.class.getClassLoader().getResourceAsStream(resourcePath);
+            response = new byte[stream.available()];
+            stream.read(response);
             responseCode = 200;
         }
 
