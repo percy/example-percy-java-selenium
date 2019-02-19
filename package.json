@@ -4,6 +4,6 @@
     "test": "./run_snapshots.sh"
   },
   "devDependencies": {
-    "@percy/agent": "0.0.50"
+    "@percy/agent": "^0.1.15"
   }
 }
