@@ -4,7 +4,8 @@ default_steps: &default_steps
   steps:
     - checkout
     - run: sudo apt-get install maven
-    - run: mvn compile
+    # Get Java dependencies before trying to build tests.
+    - run: mvn dependency:go-offline
     - run: npm test
 
 jobs:
