@@ -3,7 +3,7 @@ version: 2.1
 default_steps: &default_steps
   steps:
     - checkout
-    - run: ./run_snapshots.sh
+    - run: npm test
 
 jobs:
   node_8:
