@@ -3,6 +3,7 @@ version: 2.1
 default_steps: &default_steps
   steps:
     - checkout
+    - run: sudo apt-get install maven
     - run: npm test
 
 jobs:
