@@ -6,6 +6,8 @@ default_steps: &default_steps
     - run: sudo apt-get install maven
     # Get Java dependencies before trying to build tests.
     - run: mvn dependency:go-offline
+    # Installs @percy/agent
+    - run: npm install
     - run: npm test
 
 jobs:
