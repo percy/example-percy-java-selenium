@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "test": "./run_snapshots.sh"
+    "test": "node ./run-tests.js",
+    "percy": "percy exec -- mvn test"
   },
   "devDependencies": {
     "@percy/agent": "^0.1.15"
