@@ -34,13 +34,10 @@ To run the tests:
 $ mvn test
 ```
 
-To install the Percy agent for this project, run `npm install`:
 
-```bash
-$ npm install
-```
+## Running the tests
 
 To run Percy snapshots, first set the `PERCY_TOKEN` environment variable, and then run:
 ```bash
-$ ./run_snapshots.sh
+$ npm run test
 ```
