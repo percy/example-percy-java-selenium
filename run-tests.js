@@ -21,15 +21,20 @@ function runTests() {
   })
 
   tests.on("close", () => {
-    console.log('Tests completed!');
+    console.log("Tests completed!");
+  });
+
+  // Otherwise errors are given a 0 exit code
+  tests.on("exit", code => {
+    code !== 0 ? process.exit(code) : "";
   });
 }
 
 // If the dependencies aren't there, then lets install them for
-if(!fs.existsSync(PERCY_CMD)) {
+if (!fs.existsSync(PERCY_CMD)) {
   const install = spawn(NPM_CMD, ["install"], {
     stdio: "inherit",
-    windowsVerbatimArguments: true,
+    windowsVerbatimArguments: true
   });
 
   install.on("close", () => {
