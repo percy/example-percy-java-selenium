@@ -9,11 +9,20 @@ This example app is an HTTP server that serves a fork of the [TodoMVC](https://g
 It requires Java 8 and Maven >3.6.
 
 The Selenium tests use ChromeDriver, which you need to install separately for your system.
+
 On Mac OS, you can use Homebrew:
 ```bash
 $ brew tap homebrew/cask && brew cask install chromedriver
 ```
-For other systems, see: https://sites.google.com/a/chromium.org/chromedriver/.
+
+On Windows, you can use Chocolatey:
+
+```bash
+$ choco install chromedriver
+```
+
+For other systems (or installation alternatives), see:
+https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver
 
 ## Building and running the app
 

@@ -10,7 +10,8 @@ const PERCY_CMD = /^win/.test(platform)
       : `${process.cwd()}/node_modules/.bin/percy`
 
 /**
- * Run tests by running the NPM script in the `package.json`
+ * Run tests by calling the percy executable and passing
+ * the right mvn executable
  *
  */
 function runTests() {
