@@ -1,8 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "test": "node ./run-tests.js",
-    "percy": "percy exec -- mvn test"
+    "test": "node ./run-tests.js"
   },
   "devDependencies": {
     "@percy/agent": "^0.1.15"
