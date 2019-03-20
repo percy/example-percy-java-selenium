@@ -1,13 +1,14 @@
 const fs = require("fs");
 const { spawn } = require("child_process");
 const platform = require("os").platform();
+const IS_WIN = /^win/.test(platform);
 
 // We need to change the path / command based on the platform they're using
-const NPM_CMD = /^win/.test(platform) ? `npm.cmd` : `npm`
-const MVN_CMD = /^win/.test(platform) ? `mvn.cmd` : `mvn`
-const PERCY_CMD = /^win/.test(platform)
-      ? `${process.cwd()}\\node_modules\\.bin\\percy.cmd`
-      : `${process.cwd()}/node_modules/.bin/percy`
+const NPM_CMD = IS_WIN ? "npm.cmd" : "npm";
+const MVN_CMD = IS_WIN ? "mvn.cmd" : "mvn";
+const PERCY_CMD = IS_WIN
+  ? `${process.cwd()}\\node_modules\\.bin\\percy.cmd`
+  : `${process.cwd()}/node_modules/.bin/percy`;
 
 /**
  * Run tests by calling the percy executable and passing
@@ -15,10 +16,10 @@ const PERCY_CMD = /^win/.test(platform)
  *
  */
 function runTests() {
-  const tests = spawn(PERCY_CMD, ["exec", `-- ${MVN_CMD} test`], {
+  const tests = spawn(MVN_CMD, ["test"], {
     stdio: "inherit",
-    windowsVerbatimArguments: true,
-  })
+    windowsVerbatimArguments: true
+  });
 
   tests.on("close", () => {
     console.log("Tests completed!");
