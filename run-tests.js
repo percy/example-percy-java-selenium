@@ -31,7 +31,7 @@ function runTests() {
   });
 }
 
-// If the dependencies aren't there, then lets install them for
+// If the dependencies aren't present then lets do the install for the user
 if (!fs.existsSync(PERCY_CMD)) {
   const install = spawn(NPM_CMD, ["install"], {
     stdio: "inherit",
