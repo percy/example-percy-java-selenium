@@ -3,24 +3,24 @@ version: 2.1
 default_steps: &default_steps
   steps:
     - checkout
-    - run: sudo apt-get install maven
     # Get Java dependencies before trying to build tests.
-    - run: mvn install
+    - run: mvn dependency:go-offline
     # Installs @percy/agent
+    - run: node --version
     - run: npm install
     - run: npm test
 
 jobs:
   node_8:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/openjdk:8u212-stretch-node-browsers-legacy
     environment:
       PERCY_ENABLE: 0
     <<: *default_steps
   node_10_with_percy:
     # We've opted this node version to be the one that runs and reports Percy's status
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/openjdk:8u212-stretch-node-browsers-legacy
     <<: *default_steps
 
 workflows:
