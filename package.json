@@ -4,6 +4,6 @@
     "test": "percy exec -- node ./run-tests.js"
   },
   "devDependencies": {
-    "@percy/agent": "^0.1.15"
+    "@percy/agent": "~0"
   }
 }
