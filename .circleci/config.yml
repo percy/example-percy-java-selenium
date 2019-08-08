@@ -1,27 +1,31 @@
 version: 2.1
-
-default_steps: &default_steps
-  steps:
-    - checkout
-    # Get Java dependencies before trying to build tests.
-    - run: mvn dependency:go-offline
-    # Installs @percy/agent
-    - run: node --version
-    - run: npm install
-    - run: npm test
-
 jobs:
   node_8:
     docker:
       - image: circleci/openjdk:8u212-stretch-node-browsers-legacy
     environment:
       PERCY_ENABLE: 0
-    <<: *default_steps
+    steps:
+      - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash
+      - run: echo 'export NVM_DIR=$HOME/.nvm' >> $BASH_ENV && echo 'source $NVM_DIR/nvm.sh' >> $BASH_ENV
+      - run: nvm install 8
+      - checkout
+      # Get Java dependencies before trying to build tests.
+      - run: mvn dependency:go-offline
+      # Installs @percy/agent
+      - run: npm install
+      - run: npm test
   node_10_with_percy:
     # We've opted this node version to be the one that runs and reports Percy's status
     docker:
       - image: circleci/openjdk:8u212-stretch-node-browsers-legacy
-    <<: *default_steps
+    steps:
+      - checkout
+      # Get Java dependencies before trying to build tests.
+      - run: mvn dependency:go-offline
+      # Installs @percy/agent
+      - run: npm install
+      - run: npm test
 
 workflows:
   version: 2
