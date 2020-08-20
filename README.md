@@ -1,5 +1,5 @@
 # example-percy-java-selenium
-Example app demonstrating Percy's Java Selenium integration.
+Example app used by the [Percy Java Selenium tutorial](https://docs.percy.io/docs/java-selenium-testing-tutorial) demonstrating Percy's Java Selenium integration.
 
 This example app is an HTTP server that serves a fork of the [TodoMVC](https://github.com/tastejs/todomvc)
 [Vanilla-ES6](https://github.com/tastejs/todomvc/tree/master/examples/vanilla-es6)
@@ -48,5 +48,6 @@ $ mvn test
 
 To run Percy snapshots, first set the `PERCY_TOKEN` environment variable, and then run:
 ```bash
+$ npm install
 $ npm run test
 ```
