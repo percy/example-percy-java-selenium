@@ -25,7 +25,7 @@ Clone the example application and install dependencies:
 ```bash
 $ git clone git@github.com:percy/example-percy-java-selenium.git
 $ cd example-percy-java-selenium
-$ npm install
+$ make install
 ```
 
 The example app and its tests will now be ready to go. You can explore the app
@@ -67,7 +67,7 @@ Check out a new branch for your work in this tutorial (we'll call this branch
 
 ``` shell
 $ git checkout -b tutorial-example
-$ npm run test
+$ make test
 ```
 
 This will run the app's Java Selenium tests, which contain calls to create Percy snapshots. The snapshots
@@ -100,7 +100,7 @@ $ git commit -am "Emphasize 'Clear completed' button"
 Run the tests with snapshots again:
 
 ``` shell
-$ npm run test
+$ make test
 ```
 
 This will run the tests again and take new snapshots of our modified application. The new snapshots

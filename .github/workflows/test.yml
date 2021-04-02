@@ -14,7 +14,7 @@ jobs:
           path: ~/.npm
           key: v1/${{ runner.os }}/java-8/${{ hashFiles('**/package-lock.json') }}
           restore-keys: v1/${{ runner.os }}/java-8/
-      - run: npm ci
-      - run: npx percy exec -- mvn test
+      - run: make install
+      - run: make test
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
