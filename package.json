@@ -1,9 +1,10 @@
 {
   "private": true,
   "scripts": {
-    "test": "percy exec -- node ./run-tests.js"
+    "test": "percy exec -- mvn test"
   },
   "devDependencies": {
-    "@percy/agent": "~0"
+    "@percy/cli": "^1.0.0-beta.44",
+    "todomvc-app-css": "^2.3.0"
   }
 }
