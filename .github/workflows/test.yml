@@ -11,10 +11,10 @@ jobs:
           java-version: 8
       - uses: actions/cache@v2
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: ~/.npm
           key: v1/${{ runner.os }}/java-8/${{ hashFiles('**/package-lock.json') }}
           restore-keys: v1/${{ runner.os }}/java-8/
-      - run: yarn
+      - run: npm ci
       - run: npx percy exec -- mvn test
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
