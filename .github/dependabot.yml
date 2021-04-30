@@ -6,3 +6,9 @@ updates:
     interval: monthly
     time: "03:00"
     timezone: US/Central
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: monthly
+    time: "03:00"
+    timezone: US/Central
