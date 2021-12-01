@@ -4,7 +4,7 @@
     "test": "percy exec -- mvn test"
   },
   "devDependencies": {
-    "@percy/cli": "^1.0.0-beta.70",
+    "@percy/cli": "^1.0.0-beta.71",
     "todomvc-app-css": "^2.4.1"
   }
 }
