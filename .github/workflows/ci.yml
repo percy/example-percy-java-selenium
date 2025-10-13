@@ -1,0 +1,35 @@
+# Name for your GitHub Actions workflow
+name: Percy Visual Tests
+
+# Run this workflow on every push to the main branch
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    # Run the job on the latest version of Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checks-out your repository so your job can access the code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Sets up Java (JDK 11) and Maven
+      - name: Setup Java and Maven
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '11'
+
+      # Step 3: Install the Percy CLI (required for 'percy exec')
+      - name: Install Percy CLI
+        run: npm install @percy/cli
+
+      # Step 4: Run the Percy tests
+      # The PERCY_TOKEN is securely accessed from GitHub Secrets
+      - name: Run Percy tests
+        run: npx percy exec -- mvn test
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
