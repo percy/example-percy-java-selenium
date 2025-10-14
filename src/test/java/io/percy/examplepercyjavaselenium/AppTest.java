@@ -59,7 +59,7 @@ public class AppTest {
         if (driver != null) {
             driver.quit();
         }
-        // Shutdown our server and make sure the threadpool also terminates.
+        // Shutdown our server and make sure the threadpool also terminates
         server.stop(1);
         serverExecutor.shutdownNow();
     }
