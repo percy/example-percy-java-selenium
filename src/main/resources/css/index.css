@@ -69,12 +69,14 @@ body {
 
 .todoapp h1 {
 	position: absolute;
-	top: -140px;
+	top: -150px; 
+	/* changed top from 140 to 150 in the feature branch task */
 	width: 100%;
 	font-size: 80px;
 	font-weight: 200;
 	text-align: center;
-	color: #b83f45;
+	color: #af5b5e;
+	/*changed the color*/
 	-webkit-text-rendering: optimizeLegibility;
 	-moz-text-rendering: optimizeLegibility;
 	text-rendering: optimizeLegibility;
