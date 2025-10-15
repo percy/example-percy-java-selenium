@@ -22,7 +22,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.junit.jupiter.api.Assumptions;
 
 import io.percy.selenium.Percy;
 
