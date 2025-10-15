@@ -18,6 +18,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -35,22 +37,28 @@ public class AppTest {
 
     @BeforeEach
     public void startAppAndOpenBrowser() throws IOException {
-        // Disable browser logs from being logged to stdout
-        System.setProperty(FirefoxDriver.SystemProperty.BROWSER_LOGFILE,"/dev/null");
         // Create a threadpool with 1 thread and run our server on it.
         serverExecutor = Executors.newFixedThreadPool(1);
         server = App.startServer(serverExecutor);
-        FirefoxOptions options = new FirefoxOptions();
-        options.setHeadless(true);
-        driver = new FirefoxDriver(options);
+
+        // Use Chrome by default with common headless flags.
+        System.setProperty("webdriver.chrome.silentOutput","true");
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless=new");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("--disable-gpu");
+        driver = new ChromeDriver(chromeOptions);
         percy = new Percy(driver);
     }
 
     @AfterEach
     public void closeBrowser() {
-        // Close our test browser.
-        driver.quit();
-        // Shutdown our server and make sure the threadpool also terminates.
+        // Close our test browser (if it was started).
+        if (driver != null) {
+            driver.quit();
+        }
+        // Shutdown our server and make sure the threadpool also terminates
         server.stop(1);
         serverExecutor.shutdownNow();
     }
