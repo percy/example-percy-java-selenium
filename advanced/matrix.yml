@@ -1,0 +1,78 @@
+# PER-8195 Phase 1 — Java-Selenium matrix-row mapping (STUB).
+# Test code in src/test/java/io/percy/examplepercyjavaselenium/AdvancedTest.java — TO BE WRITTEN.
+
+sdk: java-selenium
+package: io.percy:percy-java-selenium
+language: java
+sdk_min_version: '2.1.2'
+cli_min_version: '1.31.10'
+
+rows:
+  # Java SDK exposes both typed-overload signatures AND a Map<String,Object> options overload.
+  - id: widths
+    state: planned
+    test: 'AdvancedTest > exercisesWidths (uses snapshot(name, widths) overload)'
+  - id: min_height
+    state: planned
+    test: 'AdvancedTest > exercisesMinHeight (uses snapshot(name, widths, minHeight) overload)'
+  - id: enable_javascript
+    state: planned
+    test: 'AdvancedTest > exercisesEnableJavaScript (uses snapshot(name, widths, minHeight, enableJavaScript) overload)'
+  - id: percy_css
+    state: planned
+    test: 'AdvancedTest > exercisesPercyCss (uses snapshot(name, ..., percyCSS) overload)'
+  - id: scope
+    state: planned
+    test: 'AdvancedTest > exercisesScope (uses snapshot(name, ..., scope) overload)'
+  - id: sync
+    state: planned
+    test: 'AdvancedTest > exercisesSync (uses snapshot(name, ..., sync) overload)'
+  - id: responsive_snapshot_capture
+    state: planned
+    test: 'AdvancedTest > exercisesResponsiveSnapshotCapture'
+  - id: readiness_preset
+    state: planned
+    test: 'AdvancedTest > exercisesReadiness (Map options with readiness key)'
+
+  # Java-specific.
+  - id: map_options_overload
+    state: planned
+    test: 'AdvancedTest > exercisesMapOptions (snapshot(name, Map<String, Object> options))'
+  - id: create_region_helper
+    state: planned
+    test: 'AdvancedTest > exercisesRegions (via createRegion static helper)'
+  - id: regions
+    state: planned
+    test: 'AdvancedTest > exercisesRegions'
+
+  # Not exposed in Java SDK signatures.
+  - id: dom_transformation
+    state: planned
+    test: 'via Map options if accepted by CLI; verify in advanced/'
+  - id: discovery
+    state: n_a
+    reason: 'Per-build only.'
+  - id: device_pixel_ratio
+    state: planned
+    test: 'via Map options'
+  - id: labels
+    state: planned
+    test: 'via Map options'
+  - id: test_case
+    state: planned
+    test: 'via Map options'
+  - id: browsers
+    state: planned
+    test: 'via Map options'
+
+  - id: env_percy_server_address
+    state: planned
+    test: 'CI: advanced job sets PERCY_SERVER_ADDRESS via env'
+  - id: percy_yml_global_config
+    state: planned
+    test: 'global config consumed via .percy.yml'
+  - id: environment_info_reporting
+    state: covered
+    test: 'automatic via percy-java-selenium client info'
+
+# Pre-existing basic-example coverage (AppTest.java): widths exercised (line 94, 3-width array), minHeight exercised (line 114, value=2000). Other options unexercised.
