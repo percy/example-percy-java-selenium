@@ -1,0 +1,15 @@
+# PER-8195 — advanced example global config for io.percy:percy-java-selenium.
+# Per-snapshot Map options in AdvancedTest override these.
+
+version: 2
+
+snapshot:
+  widths: [375, 1280]
+  min-height: 1024
+  percy-css: |
+    .new-todo::placeholder { color: #999 !important; }
+
+discovery:
+  allowed-hostnames:
+    - localhost
+  network-idle-timeout: 500

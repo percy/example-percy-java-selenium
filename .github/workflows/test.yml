@@ -1,8 +1,12 @@
-name: Test
-on: push
+name: Tests
+
+# PER-8195: explicitly use `pull_request` only. `pull_request_target` is
+# forbidden — it checks out attacker-controlled code with full secret access.
+on: [push, pull_request]
+
 jobs:
-  test:
-    name: Test
+  basic:
+    name: basic
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,3 +23,46 @@ jobs:
       - run: make test
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+
+  advanced:
+    # PER-8195 advanced example. Runs in --testing mode so PR builds (including
+    # forks and Dependabot) don't require a real PERCY_TOKEN. The `--testing`
+    # flag is only valid on `percy exec` (not `exec:start`).
+    name: advanced
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: advanced
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Install jq + yq
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq jq
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+      - name: Install advanced/ dependencies
+        run: make install
+      - name: Fetch shared advanced-snapshot assertion helper
+        # TODO(PER-8195 D8): pin to a tagged commit once percy-public-repos-parent
+        # publishes the scripts/ dir to a stable URL or to an npm package.
+        run: |
+          curl -fsSL -o /tmp/assert-advanced-snapshots.sh \
+            https://raw.githubusercontent.com/percy/percy-public-repos-parent/main/scripts/assert-advanced-snapshots.sh
+          chmod +x /tmp/assert-advanced-snapshots.sh
+      - name: Run mvn test advanced (--testing) + capture /test/requests
+        env:
+          PERCY_TOKEN: fake_token
+        run: make test-advanced-ci
+      - name: Assert matrix-row coverage
+        env:
+          PERCY_REQUESTS_FILE: ${{ github.workspace }}/advanced/advanced-requests.json
+        run: /tmp/assert-advanced-snapshots.sh ./matrix.yml

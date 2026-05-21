@@ -1,27 +1,53 @@
-# Advanced Percy + Selenium-Java example — STUB
+# Advanced Percy + Selenium-Java example
 
-**Status:** Phase 1 stub. `matrix.yml` is populated based on `io.percy:percy-java-selenium` research. Test code in `src/test/java/io/percy/examplepercyjavaselenium/AdvancedTest.java` is **not yet written**.
+This directory exercises the full applicable Percy SDK feature surface for `io.percy:percy-java-selenium`. See the basic example at the repo root for the minimum integration.
 
-See the basic example at the repo root. See [`matrix.yml`](./matrix.yml) for the planned matrix-row coverage.
+## What this example covers
 
-## What this example will cover
+A JUnit 5 suite (`src/test/java/io/percy/examplepercyjavaselenium/advanced/AdvancedTest.java`) where each `@Test` exercises one row of the [Percy SDK Advanced Feature Matrix](../../../docs/advanced-example-feature-matrix.md) using the SDK's typed overloads (`snapshot(name, widths, minHeight, enableJavaScript, percyCSS, scope)`) and the `Map<String, Object> options` overload for everything else (responsive, readiness, labels, testCase, devicePixelRatio, browsers, regions, sync).
 
-Each `@Test` will exercise one row of the matrix using the SDK's typed overloads and the `Map<String, Object> options` overload. Includes `createRegion` static helper for regions.
+Global SDK config — readiness preset, default widths, percyCSS, discovery — lives in `.percy.yml`.
 
-The Java SDK exposes both typed `snapshot(name, widths, minHeight, enableJavaScript, ...)` overloads AND `snapshot(name, Map<String, Object> options)`. The advanced example exercises both shapes to demonstrate the API surface.
-
-## Run locally (once tests are written)
+## Run locally
 
 ```bash
 cd advanced
-# CLI managed separately via npm
-npm install -g @percy/cli
-export PERCY_TOKEN="<your project token>"      # do NOT commit
-npx percy exec -- mvn test
+make install                       # installs @percy/cli into node_modules
+export PERCY_TOKEN="<your token>"  # do NOT commit this
+make test
 ```
+
+To run without a real token (CI assertion mode):
+
+```bash
+make test-advanced-ci   # uses --testing + PERCY_TOKEN=fake_token + captures /test/requests
+```
+
+The CI variant asserts every matrix row appears in the captured POST bodies at the local `/test/requests` endpoint. No real Percy build is created.
 
 ## Coverage matrix
 
-Source of truth: [`matrix.yml`](./matrix.yml).
+States: `Covered` / `N/A — <reason>` / `Planned` / `Deprecated`. Source of truth is [`matrix.yml`](./matrix.yml).
 
-> Phase 1 stub: most rows are currently `Planned`. Basic example (`AppTest.java`) already exercises `widths` and `minHeight`.
+| Feature | State | Test |
+|---|---|---|
+| widths (typed overload) | Covered | `exercisesWidthsOverload` |
+| minHeight (typed overload) | Covered | `exercisesMinHeightOverload` |
+| enableJavaScript (typed overload) | Covered | `exercisesEnableJavaScriptOverload` |
+| percyCSS (typed overload) | Covered | `exercisesPercyCssOverload` |
+| scope (typed overload) | Covered | `exercisesScopeOverload` |
+| responsiveSnapshotCapture (Map options) | Covered | `exercisesMapOptionsResponsiveAndReadiness` |
+| readiness preset (Map options) | Covered | `exercisesMapOptionsResponsiveAndReadiness` |
+| labels (Map options) | Covered | `exercisesMapOptionsLabelsAndTestCase` |
+| testCase (Map options) | Covered | `exercisesMapOptionsLabelsAndTestCase` |
+| devicePixelRatio (Map options) | Covered | `exercisesMapOptionsDevicePixelRatio` |
+| browsers override (Map options) | Covered | `exercisesMapOptionsBrowsers` |
+| regions (Map options) | Covered | `exercisesMapOptionsRegions` |
+| sync mode (Map options) | Covered | `exercisesMapOptionsSync` |
+| Map<String, Object> options overload | Covered | seven `exercisesMapOptions*` tests |
+| `.percy.yml` global config | Covered | `.percy.yml` consumed at build start |
+| environment info reporting | Covered | automatic via SDK client info |
+| PERCY_SERVER_ADDRESS via env | Covered | CI advanced job picks up `PERCY_SERVER_ADDRESS` |
+| `Percy.createRegion` static helper | Planned | — |
+| `domTransformation` (Map options) | Planned | — |
+| `discovery` per-snapshot | N/A | discovery is per-build only |
