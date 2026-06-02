@@ -40,8 +40,8 @@ public class AdvancedTest {
 
   @BeforeAll
   static void start() throws IOException {
-    // Serve the parent example repo (../) — index.html + js/ are siblings of advanced/.
-    Path root = new File("..").toPath().toAbsolutePath().normalize();
+    // Serve TodoMVC frontend from src/main/resources (index.html + css/ + js/ live there).
+    Path root = new File("../src/main/resources").toPath().toAbsolutePath().normalize();
     serverExecutor = Executors.newFixedThreadPool(2);
     server = HttpServer.create(new InetSocketAddress(PORT), 0);
     server.setExecutor(serverExecutor);
