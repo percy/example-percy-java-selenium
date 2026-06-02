@@ -1,0 +1,9 @@
+{
+  "name": "example-percy-java-selenium-advanced",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Advanced Percy example — local @percy/cli so the Makefile's node_modules/.bin/percy resolves (PER-8195).",
+  "devDependencies": {
+    "@percy/cli": "^1.31.13"
+  }
+}
