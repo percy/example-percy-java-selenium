@@ -1,0 +1,76 @@
+# PER-8195 Phase 1 — Java-Selenium matrix-row mapping.
+# Test code: src/test/java/io/percy/examplepercyjavaselenium/advanced/AdvancedTest.java
+
+sdk: java-selenium
+package: io.percy:percy-java-selenium
+language: java
+sdk_min_version: '2.1.2'
+cli_min_version: '1.31.13'
+
+rows:
+  # Typed-overload signatures.
+  - id: widths
+    state: covered
+    test: 'AdvancedTest > exercisesWidthsOverload'
+  - id: min_height
+    state: covered
+    test: 'AdvancedTest > exercisesMinHeightOverload'
+  - id: enable_javascript
+    state: covered
+    test: 'AdvancedTest > exercisesEnableJavaScriptOverload'
+  - id: percy_css
+    state: covered
+    test: 'AdvancedTest > exercisesPercyCssOverload'
+  - id: scope
+    state: covered
+    test: 'AdvancedTest > exercisesScopeOverload'
+
+  # Map-based options overload.
+  - id: responsive_snapshot_capture
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsResponsiveAndReadiness'
+  - id: readiness_preset
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsResponsiveAndReadiness'
+  - id: labels
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsLabelsAndTestCase'
+  - id: test_case
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsLabelsAndTestCase'
+  - id: device_pixel_ratio
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsDevicePixelRatio'
+  - id: browsers
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsBrowsers'
+  - id: regions
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsRegions'
+  - id: sync
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptionsSync'
+  - id: map_options_overload
+    state: covered
+    test: 'AdvancedTest > exercisesMapOptions* (7 tests use the Map<String,Object> overload)'
+
+  - id: create_region_helper
+    state: planned
+    test: 'use of Percy.createRegion static helper to build region — TBD'
+  - id: dom_transformation
+    state: planned
+    test: 'AdvancedTest > exercisesDomTransformation (via Map options)'
+
+  - id: discovery
+    state: n_a
+    reason: 'discovery is per-build, not per-snapshot in this SDK.'
+
+  - id: env_percy_server_address
+    state: covered
+    test: 'CI: advanced job sets PERCY_SERVER_ADDRESS via env'
+  - id: percy_yml_global_config
+    state: covered
+    test: 'global config consumed via .percy.yml'
+  - id: environment_info_reporting
+    state: covered
+    test: 'automatic via io.percy:percy-java-selenium client info'

@@ -1,10 +1,18 @@
 # example-percy-java-selenium
 Example app used by the [Percy Java Selenium tutorial](https://docs.percy.io/docs/java-selenium-testing-tutorial) demonstrating Percy's Java Selenium integration.
 
+> **New:** This repo ships an [`advanced/`](./advanced) example covering the full applicable Percy SDK feature surface for `io.percy:percy-java-selenium`. See the [Percy SDK Feature Matrix](https://docs.percy.io/docs/sdk-feature-matrix) for cross-SDK coverage.
+
 Based on the [TodoMVC](https://github.com/tastejs/todomvc) [VanillaJS](https://github.com/tastejs/todomvc/tree/master/examples/vanillajs)
 app, forked at commit
 [4e301c7014093505dcf6678c8f97a5e8dee2d250](https://github.com/tastejs/todomvc/tree/4e301c7014093505dcf6678c8f97a5e8dee2d250).
 
+## Examples
+
+| Example | What it shows | Run command |
+|---|---|---|
+| `./` (basic, at repo root) | Minimum viable integration: `percy.snapshot(name)` plus widths and minHeight typed overloads. Start here. | `make test` |
+| [`./advanced/`](./advanced) | Full applicable Percy SDK feature surface using both typed overloads and the `Map<String, Object> options` overload (responsive, readiness, labels, regions, devicePixelRatio, browsers, sync). See [`advanced/README.md`](./advanced/README.md) for the matrix-row coverage table. | `cd advanced && make test` |
 
 ## Java Selenium Tutorial
 
